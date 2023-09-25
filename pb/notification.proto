@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/Empty.proto";
+
+option go_package = "./pb";
+
+message Mail {
+  string email = 1;
+  string subject = 2;
+  string body = 3;
+}
+
+message MailResponse {
+  string status = 1;
+}
+
+message ListMail {
+  repeated Mail mails = 1;
+}
+
+service Notification {
+  rpc SendEmail(Mail) returns (MailResponse) {}
+  rpc GetMail(google.protobuf.Empty) returns (ListMail) {}
+}
